@@ -1,0 +1,115 @@
+{
+  "nodes": {
+    "mcEatBurg": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "peachRampSkateboard": "peachRampSkateboard"
+      },
+      "locked": {
+        "lastModified": 1789722370,
+        "narHash": "sha256-/WGMwQ1ywO+2OEcfALzMB/EQYZ8Bly4qVbvOmxLZH3E=",
+        "owner": "nrs-status",
+        "repo": "mcEatBurg",
+        "rev": "7fa7128f041015a3e35123f7024462934512463b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nrs-status",
+        "repo": "mcEatBurg",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1788881743,
+        "narHash": "sha256-2V9GZGvPfrNzxFozhI9dcqV+c3QdA8YZrvAAzqEB+dI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d6524aaca2ff07876657ae2b323f24be4874944b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d6524aaca2ff07876657ae2b323f24be4874944b",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1789546076,
+        "narHash": "sha256-zVxLZiSnmaaPLwnhj7pwmqe3axBg/C6nG5JZsJMh2g4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b1b875982b17dabde9b4a37f3e229e74913e6db3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1789546076,
+        "narHash": "sha256-zVxLZiSnmaaPLwnhj7pwmqe3axBg/C6nG5JZsJMh2g4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b1b875982b17dabde9b4a37f3e229e74913e6db3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "peachRampSkateboard": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1789720366,
+        "narHash": "sha256-FYit+l4XdQ07PViMQhFO1Aikve2a0mys0IsBmaObfsY=",
+        "owner": "nrs-status",
+        "repo": "newPeachRampSkateboard",
+        "rev": "eab1c23343041f2e6ddb0d1d73612208f22e3cfd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nrs-status",
+        "repo": "newPeachRampSkateboard",
+        "type": "github"
+      }
+    },
+    "peachRampSkateboard_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1789720366,
+        "narHash": "sha256-FYit+l4XdQ07PViMQhFO1Aikve2a0mys0IsBmaObfsY=",
+        "owner": "nrs-status",
+        "repo": "newPeachRampSkateboard",
+        "rev": "eab1c23343041f2e6ddb0d1d73612208f22e3cfd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nrs-status",
+        "repo": "newPeachRampSkateboard",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "mcEatBurg": "mcEatBurg",
+        "peachRampSkateboard": "peachRampSkateboard_2"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
