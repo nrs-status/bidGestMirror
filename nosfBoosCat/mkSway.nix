@@ -3,20 +3,16 @@
 let
   swayConfig = import ./mkSwayConfig.nix { inherit pkgsLib pkgs; } swayConfigAttrs;
   sway-wrapped = pkgs.writeShellScriptBin "sway" ''
-    exec ${pkgs.sway}/bin/sway -c ${swayConfig} "$@"                                                                                                                                                              
+    exec ${pkgs.sway}/bin/sway -c ${swayConfig} "$@"
   '';
 in
 pkgs.symlinkJoin {
   name = "sway";
   paths = [ sway-wrapped ];
-  buildInputs = [ pkgs.makeWrapper ];
+  nativeBuildInputs = [ pkgs.makeWrapper ];
   postBuild = ''
-    wrapProgram $out/bin/sway \                                                                                                                                                                                   
-      --prefix PATH : ${
-        pkgs.lib.makeBinPath [
-          pkgs.foot
-          pkgs.j4-dmenu-desktop
-        ]
-      }                                                                                                                                 
+    # Template: add wrapper args here as needed, e.g.
+    #   --prefix PATH : ''${pkgs.lib.makeBinPath [ pkgs.someRuntimeDep ]}
+    wrapProgram $out/bin/sway
   '';
 }
