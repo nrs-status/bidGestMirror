@@ -1,2 +1,2 @@
-{ pkgs, localLib, ... }:
-{}
+{ localLib, ... }:
+localLib.mkSway { swayConfigAttrs = {}; }

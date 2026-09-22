@@ -1,7 +1,7 @@
 { pkgs, pkgsLib, ... }:
-{ swayConfigAttrset }:
+{ swayConfigAttrs }:
 let
-  swayConfig = import ./mkSwayConfig.nix { inherit pkgsLib pkgs; } swayConfigAttrset;
+  swayConfig = import ./mkSwayConfig.nix { inherit pkgsLib pkgs; } swayConfigAttrs;
   sway-wrapped = pkgs.writeShellScriptBin "sway" ''
     exec ${pkgs.sway}/bin/sway -c ${swayConfig} "$@"                                                                                                                                                              
   '';
