@@ -3,6 +3,7 @@
   inputs = {
     mcEatBurg.url = "github:nrs-status/mcEatBurg";
     peachRampSkateboard.url = "github:nrs-status/newPeachRampSkateboard";
+    frontArmToPlane.url = "github:nrs-status/newFrontArmToPlane";
   };
 
   outputs =
@@ -14,7 +15,8 @@
       localLib = import ./nosfBoosCat {
         inherit baseLib pkgsLib pkgs;
       };
-      localPkgsArgs = { inherit pkgs localLib baseLib pkgsLib; };
+      wrappedPkgs = inputs.frontArmToPlane.packages.x86_64-linux;
+      localPkgsArgs = { inherit pkgs localLib baseLib pkgsLib wrappedPkgs; };
     in
     {
       packages.x86_64-linux = import ./kanSplashSnowman localPkgsArgs;
