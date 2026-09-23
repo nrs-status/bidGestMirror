@@ -1,6 +1,6 @@
 { ... }:
 {
-  swayConfigAttrs =
+  config.swayConfigAttrs =
     let
       gruvbox = import ./gruvboxColors.nix;
     in

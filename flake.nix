@@ -4,6 +4,9 @@
     mcEatBurg.url = "github:nrs-status/mcEatBurg";
     peachRampSkateboard.url = "github:nrs-status/newPeachRampSkateboard";
     frontArmToPlane.url = "github:nrs-status/newFrontArmToPlane";
+    # voice-input lives in the nasExitGiScorp flake, which frontArmToPlane
+    # already pins; reuse that exact locked node instead of adding a new copy.
+    nasExitGiScorp.follows = "frontArmToPlane/nasExitGiScorp";
   };
 
   outputs =
@@ -16,8 +19,19 @@
         inherit baseLib pkgsLib pkgs;
       };
       wrappedPkgs = inputs.frontArmToPlane.packages.x86_64-linux;
-      localModules = import ./marPaintsAngel { inherit pkgs localLib baseLib pkgsLib wrappedPkgs; };
-      localPkgsArgs = { inherit pkgs localLib baseLib pkgsLib wrappedPkgs localModules; };
+      newPkgs = inputs.nasExitGiScorp.packages.x86_64-linux;
+      localModules = import ./marPaintsAngel { inherit baseLib; };
+      localPkgsArgs = {
+        inherit
+          pkgs
+          localLib
+          baseLib
+          pkgsLib
+          wrappedPkgs
+          newPkgs
+          localModules
+          ;
+      };
     in
     {
       packages.x86_64-linux = import ./kanSplashSnowman localPkgsArgs;

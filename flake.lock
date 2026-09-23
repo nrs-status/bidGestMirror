@@ -484,6 +484,10 @@
       "inputs": {
         "frontArmToPlane": "frontArmToPlane",
         "mcEatBurg": "mcEatBurg_3",
+        "nasExitGiScorp": [
+          "frontArmToPlane",
+          "nasExitGiScorp"
+        ],
         "peachRampSkateboard": "peachRampSkateboard_6"
       }
     },

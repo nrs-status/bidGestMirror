@@ -250,7 +250,7 @@ let
   startupEntryStr =
     {
       command,
-      always,
+      always ? false,
       ...
     }:
     ''
@@ -354,7 +354,9 @@ let
       (windowBorderString window floating)
       "hide_edge_borders ${window.hideEdgeBorders}"
       "focus_wrapping ${focus.wrapping}"
-      "focus_follows_mouse ${focus.followMouse}"
+      "focus_follows_mouse ${
+        if builtins.isBool focus.followMouse then yesNo focus.followMouse else focus.followMouse
+      }"
       "focus_on_window_activation ${focus.newWindow}"
       "mouse_warping ${
         if builtins.isString focus.mouseWarping then

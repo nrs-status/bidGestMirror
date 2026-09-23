@@ -7,7 +7,6 @@
 }:
 {
   imports = [ ../terminal ];
-
   config = {
     swayConfigAttrs = {
       startup = [
@@ -20,7 +19,6 @@
                 wrappedPkgs
                 config
                 ;
-              shellStartCmd = config.shellStartCmd;
             }
           );
         }

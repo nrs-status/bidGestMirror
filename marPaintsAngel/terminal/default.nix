@@ -20,7 +20,7 @@
 
     ];
     swayConfigAttrs = {
-      terminal = (pkgsLib.getExe config.terminalEmulatorPkg);
+      terminal = (pkgsLib.getExe config.terminal.terminalEmulatorPkg);
       keybindings = {
         "${config.swayConfigAttrs.modifier}+Return" =
           "exec ${pkgsLib.getExe config.terminal.terminalEmulatorPkg} ${config.terminal.shellStartCmd}";

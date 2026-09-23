@@ -147,23 +147,17 @@
         };
       }
     ];
-    waybarPkg =
-      let
-        waybarFiles = localLib.mkWaybarFiles {
-          settings = config.waybarSettings;
-          style = import ./waybarStyle.nix;
-        };
-      in
-      localLib.mkWaybar {
-        waybarSettingsAttr = waybarFiles.config;
-        waybarStyleAttrs = waybarFiles.style;
-      };
+    waybarPkg = localLib.mkWaybar {
+      waybarSettingsAttrs = config.waybarSettings;
+      waybarStyleAttrs = import ./waybarStyle.nix;
+    };
     buildInputs = [ pkgs.killall ];
     swayConfigAttrs = {
-      startup = [ { command = "exec swaymsg 'exec ${pkgsLib.getExe config.waybarPkg}'"; } ];
+      startup = [ { command = pkgsLib.getExe config.waybarPkg; } ];
       keybindings = {
 
-        "${config.swayConfigAttrs.modifier}+z" = "exec killall -SIGUSR1 .waybar-wrapped";
+        "${config.swayConfigAttrs.modifier}+z" =
+          "exec ${pkgsLib.getExe pkgs.killall} -SIGUSR1 waybar";
       };
     };
 

@@ -103,6 +103,6 @@ rec {
     fg2 = dark.bg2;
     fg3 = dark.bg3;
     fg4 = dark.bg4;
-    gray = dark.fray;
+    gray = dark.gray;
   };
 }

@@ -13,7 +13,7 @@
         # command through `sh -c`, so the pipe, redirect and `$(date ...)`
         # are evaluated at binding-press time, not at config-generation time.
         "${config.swayConfigAttrs.modifier}+n" =
-          ''exec --no-startup-id ${pkgs.mako}/bin/makoctl list -j | ${pkgsLib.getExe pkgs.jq}-r ".[] | \"[\(.urgency)] \(.app_name): \(.summary)\n\(.body)\n\"" > /tmp/mako-notifs_$(date +%F-%T).txt && ${pkgs.mako}/bin/makoctl dismiss --all'';
+          ''exec --no-startup-id ${pkgs.mako}/bin/makoctl list -j | ${pkgsLib.getExe pkgs.jq} -r ".[] | \"[\(.urgency)] \(.app_name): \(.summary)\n\(.body)\n\"" > /tmp/mako-notifs_$(date +%F-%T).txt && ${pkgs.mako}/bin/makoctl dismiss --all'';
       };
     };
   };
