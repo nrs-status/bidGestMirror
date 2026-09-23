@@ -28,7 +28,12 @@ let
         time.timezone = "America/Toronto";
 
         terminal = {
-          terminalEmulatorPkg = wrappedPkgs.kitty;
+          # wrappedPkgs.kitty appends its `--config <conf>` flag after the
+          # caller's arguments (so kitty's `+command` mode stays the first CLI
+          # argument), but that makes any `kitty <shell>` invocation pass the
+          # flag to the child, which exits immediately. The upstream kitty
+          # package is overridable, so flip it to prepend the options instead.
+          terminalEmulatorPkg = wrappedPkgs.kitty.override { optsAfterArgs = false; };
           shellStartCmd = "bash";
         };
 
