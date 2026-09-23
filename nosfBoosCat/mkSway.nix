@@ -77,6 +77,24 @@ let
     };
   } evaluatedModules.config.swayConfigAttrs;
   swayConfig = import ./mkSwayConfig.nix { inherit pkgsLib pkgs; } swayConfigAttrs;
+  # Modules' `buildInputs` are runtime deps for their sway config commands
+  # (and for scripts spawned by sway, which inherit this PATH).
+  # nixpkgs' `sway` package ships `sway`, `swaymsg`, and `swaynag` in one
+  # `bin/`, so it must not go into `buildInputs` (that would put the
+  # unwrapped `sway` binary on PATH, bypassing `-c ${swayConfig}`);
+  # `swaymsg-only` exists for callers that need `swaymsg` on PATH.
+  swayBinPath = pkgs.lib.makeBinPath
+    (evaluatedModules.config.buildInputs ++ [ swaymsg-only ]);
+  swaymsg-only =
+    pkgs.runCommand "swaymsg-only"
+      {
+        meta.mainProgram = "swaymsg";
+        passthru = { inherit (pkgs.sway) version; }; # keep versioning info
+      }
+      ''
+        mkdir -p $out/bin
+        ln -s ${pkgs.sway}/bin/swaymsg $out/bin/swaymsg
+      '';
   sway-wrapped = pkgs.writeShellScriptBin "sway" ''
     exec ${pkgs.sway}/bin/sway -c ${swayConfig} "$@"
   '';
@@ -86,8 +104,7 @@ pkgs.symlinkJoin {
   paths = [ sway-wrapped ];
   nativeBuildInputs = [ pkgs.makeWrapper ];
   postBuild = ''
-    # Template: add wrapper args here as needed, e.g.
-    #   --prefix PATH : ''${pkgs.lib.makeBinPath [ pkgs.someRuntimeDep ]}
-    wrapProgram $out/bin/sway
+    wrapProgram $out/bin/sway \
+      --suffix PATH : ${swayBinPath}
   '';
 }
