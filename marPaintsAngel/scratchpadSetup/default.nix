@@ -5,8 +5,6 @@
   ...
 }:
 {
-  imports = [ ../terminal ];
-
   options = {
     scratchPadWidth = pkgsLib.mkOption {
       type = pkgsLib.types.int;

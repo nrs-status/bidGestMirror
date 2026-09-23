@@ -6,7 +6,6 @@
   ...
 }:
 {
-  imports = [ ../terminal ];
   config = {
     swayConfigAttrs = {
       startup = [
