@@ -1,2 +1,0 @@
-{ localLib, ... }:
-localLib.mkSway { swayConfigAttrs = {}; }

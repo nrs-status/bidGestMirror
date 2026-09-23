@@ -163,7 +163,7 @@
       startup = [ { command = "exec swaymsg 'exec ${pkgsLib.getExe config.waybarPkg}'"; } ];
       keybindings = {
 
-        "${config.modifierKey}+z" = "exec killall -SIGUSR1 .waybar-wrapped";
+        "${config.swayConfigAttrs.modifier}+z" = "exec killall -SIGUSR1 .waybar-wrapped";
       };
     };
 

@@ -34,4 +34,7 @@
       );
     }
   ];
+  keybindings = {
+    "${config.swayConfigAttrs.modifier}+plus" = "scratchpad show";
+  };
 }

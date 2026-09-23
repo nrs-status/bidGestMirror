@@ -1,0 +1,26 @@
+inputs@{
+  pkgs,
+  localLib,
+  pkgsLib,
+  wrappedPkgs,
+  localModules,
+  ...
+}:
+let
+  modules = with localModules; [
+    misc
+    alternativeKeybindingMode
+    hexColorPicker
+    audioKeybindings
+    notifications
+    scratchpadSetup
+    screenCapture
+    style
+    terminal
+    toggleWlSunset
+    voiceInput
+    waybar
+    workspaceSetup
+  ];
+in
+null

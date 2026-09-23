@@ -22,10 +22,10 @@
     swayConfigAttrs = {
       terminal = (pkgsLib.getExe config.terminalEmulatorPkg);
       keybindings = {
-        "${config.modifierKey}+Return" =
+        "${config.swayConfigAttrs.modifier}+Return" =
           "exec ${pkgsLib.getExe config.terminal.terminalEmulatorPkg} ${config.terminal.shellStartCmd}";
-        "${config.modifierKey}+Shift+backslash" = "splith";
-        "${config.modifierKey}+minus" = "splitv";
+        "${config.swayConfigAttrs.modifier}+Shift+backslash" = "splith";
+        "${config.swayConfigAttrs.modifier}+minus" = "splitv";
       };
     };
 

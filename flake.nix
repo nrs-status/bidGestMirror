@@ -16,7 +16,8 @@
         inherit baseLib pkgsLib pkgs;
       };
       wrappedPkgs = inputs.frontArmToPlane.packages.x86_64-linux;
-      localPkgsArgs = { inherit pkgs localLib baseLib pkgsLib wrappedPkgs; };
+      localModules = import ./marPaintsAngel { inherit pkgs localLib baseLib pkgsLib wrappedPkgs; };
+      localPkgsArgs = { inherit pkgs localLib baseLib pkgsLib wrappedPkgs localModules; };
     in
     {
       packages.x86_64-linux = import ./kanSplashSnowman localPkgsArgs;

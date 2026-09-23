@@ -1,4 +1,5 @@
 {
+  config,
   ...
 }:
 {
@@ -11,6 +12,10 @@
         xkb_layout = "us,ca(fr),es";
         xkb_options = "grp:alt_space_toggle";
       };
+    };
+    keybindings = {
+
+      "${config.swayConfigAttrs.modifier}+Shift+a" = "focus child";
     };
   };
 }
