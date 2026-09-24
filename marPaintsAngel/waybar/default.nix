@@ -157,7 +157,7 @@
       keybindings = {
 
         "${config.swayConfigAttrs.modifier}+z" =
-          "exec ${pkgsLib.getExe pkgs.killall} -SIGUSR1 waybar";
+          "exec ${pkgsLib.getExe pkgs.killall} -SIGUSR1 .waybar-wrapped";
       };
     };
 
