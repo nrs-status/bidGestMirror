@@ -16,6 +16,10 @@
     keybindings = {
 
       "${config.swayConfigAttrs.modifier}+Shift+a" = "focus child";
+      # close the focused window
+      "${config.swayConfigAttrs.modifier}+Shift+q" = "kill";
+      # toggle fullscreen on the focused window
+      "${config.swayConfigAttrs.modifier}+f" = "fullscreen toggle";
     };
   };
 }
