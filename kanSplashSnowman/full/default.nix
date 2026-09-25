@@ -10,6 +10,7 @@ let
     with localModules;
     [
       misc
+      workspaceKeybindings
       alternativeKeybindingMode
       hexColorPicker
       audioKeybindings
