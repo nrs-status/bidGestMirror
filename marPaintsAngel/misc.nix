@@ -1,25 +1,33 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
-  config.swayConfigAttrs = {
-    focus.followMouse = false;
-    modifier = "Mod4";
-    input = {
-      "*" = {
-        xkb_numlock = "disabled";
-        xkb_layout = "us,ca(fr),es";
-        xkb_options = "grp:alt_space_toggle";
+  config = {
+    buildInputs = with pkgs; [
+      libnotify # has notify-send
+      wl-clipboard # has wl-copy
+    ];
+    swayConfigAttrs = {
+      focus.followMouse = false;
+      modifier = "Mod4";
+      input = {
+        "*" = {
+          xkb_numlock = "disabled";
+          xkb_layout = "us,ca(fr),es";
+          xkb_options = "grp:alt_space_toggle";
+        };
       };
-    };
-    keybindings = {
-
-      "${config.swayConfigAttrs.modifier}+Shift+a" = "focus child";
-      # close the focused window
-      "${config.swayConfigAttrs.modifier}+Shift+q" = "kill";
-      # toggle fullscreen on the focused window
-      "${config.swayConfigAttrs.modifier}+f" = "fullscreen toggle";
+      keybindings =
+        let
+          mod = config.swayConfigAttrs.modifier;
+        in
+        {
+          "${mod}+Shift+a" = "focus child";
+          "${mod}+Shift+q" = "kill";
+          "${mod}+f" = "fullscreen toggle";
+        };
     };
   };
 }

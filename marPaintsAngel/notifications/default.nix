@@ -1,8 +1,17 @@
-{ pkgs, pkgsLib, config, ... }:
+{
+  pkgs,
+  pkgsLib,
+  config,
+  ...
+}:
 {
   config = {
-    buildInputs = [ pkgs.mako pkgs.jq ];
+    buildInputs = [
+      pkgs.mako
+      pkgs.jq
+    ];
     swayConfigAttrs = {
+      startup = [ { command = "mako"; } ];
       keybindings = {
         # notification dump/clear: serialize every notification currently
         # displayed by mako (`makoctl list -j`) to a timestamped file in /tmp
