@@ -8,6 +8,7 @@
     buildInputs = with pkgs; [
       libnotify # has notify-send
       wl-clipboard # has wl-copy
+      wvkbd # virtual keyboard
     ];
     swayConfigAttrs = {
       focus.followMouse = false;
