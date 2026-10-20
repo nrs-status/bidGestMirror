@@ -19,6 +19,7 @@ let
       screenCapture
       style
       terminal
+      extraFonts
       toggleWlsunset
       voiceInput
       waybar

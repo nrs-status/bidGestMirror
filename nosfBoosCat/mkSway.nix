@@ -95,6 +95,31 @@ let
         mkdir -p $out/bin
         ln -s ${pkgs.sway}/bin/swaymsg $out/bin/swaymsg
       '';
+  # Fonts shipped by the modules' `buildInputs` (e.g. the Noto CJK fonts of
+  # marPaintsAngel/extraFonts.nix) are not discovered by fontconfig just
+  # because the packages are runtime deps of the wrapped sway. Two mechanisms
+  # make them available to sway and every client it spawns:
+  #
+  #   * FONTCONFIG_FILE: a generated fontconfig configuration that includes
+  #     the system fonts (/etc/fonts/fonts.conf) and adds the modules' font
+  #     directories, so glyphs the primary font does not cover (e.g. mandarin
+  #     characters such as 丨) fall back to the module-provided fonts.
+  #
+  #   * XDG_DATA_DIRS: fontconfig's stock config lists <dir prefix="xdg">
+  #     fonts</dir>, so any client that (re)generates its own fontconfig from
+  #     the system one — e.g. the kitty wrapper, which overrides
+  #     FONTCONFIG_FILE with its own conf — still finds the module fonts
+  #     through the XDG data directories.
+  moduleFontsConf =
+    pkgs.writeText "sway-module-fonts.conf" ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+      <fontconfig>
+        <include ignore_missing="yes">/etc/fonts/fonts.conf</include>
+        ${pkgs.lib.concatMapStringsSep "\n" (p: "<dir>${p}/share/fonts</dir>") evaluatedModules.config.buildInputs}
+      </fontconfig>
+    '';
+  moduleShareDirs = pkgs.lib.makeSearchPath "share" evaluatedModules.config.buildInputs;
   sway-wrapped = pkgs.writeShellScriptBin "sway" ''
     exec ${pkgs.sway}/bin/sway -c ${swayConfig} "$@"
   '';
@@ -105,6 +130,8 @@ pkgs.symlinkJoin {
   nativeBuildInputs = [ pkgs.makeWrapper ];
   postBuild = ''
     wrapProgram $out/bin/sway \
-      --suffix PATH : ${swayBinPath}
+      --suffix PATH : ${swayBinPath} \
+      --set FONTCONFIG_FILE ${moduleFontsConf} \
+      --suffix XDG_DATA_DIRS : ${moduleShareDirs}
   '';
 }
